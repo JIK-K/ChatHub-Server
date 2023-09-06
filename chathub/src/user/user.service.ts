@@ -26,4 +26,16 @@ export class UserService {
 
     return this.userMapper.toDTO(await this.userRepository.save(userEntity));
   }
+
+  async login(id: string, pw: string): Promise<UserDTO> {
+    const userEntity: User = await this.userRepository
+      .createQueryBuilder('user')
+      .where('userId = :userid AND userPassword = :userpassword', {
+        userid: id,
+        userpassword: pw,
+      })
+      .getOne();
+
+    return this.userMapper.toDTO(userEntity);
+  }
 }

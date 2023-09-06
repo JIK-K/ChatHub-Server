@@ -769,7 +769,7 @@
 
 "@nestjs/typeorm@^10.0.0":
   version "10.0.0"
-  resolved "https://registry.npmjs.org/@nestjs/typeorm/-/typeorm-10.0.0.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/typeorm/-/typeorm-10.0.0.tgz#78e20d3413d59dd3dfee03260c904f0f4040b4e1"
   integrity sha512-WQU4HCDTz4UavsFzvGUKDHqi0MO5K47yFoPXdmh+Z/hCNO7SHCMmV9jLiLukM8n5nKUqJ3jDqiljkWBcZPdCtA==
   dependencies:
     uuid "9.0.0"
@@ -3834,7 +3834,7 @@ mute-stream@0.0.8:
 
 mysql2@^3.6.0:
   version "3.6.0"
-  resolved "https://registry.npmjs.org/mysql2/-/mysql2-3.6.0.tgz"
+  resolved "https://registry.yarnpkg.com/mysql2/-/mysql2-3.6.0.tgz#d54ef4867655daf2f65ced1dbdb63852314f039f"
   integrity sha512-EWUGAhv6SphezurlfI2Fpt0uJEWLmirrtQR7SkbTHFC+4/mJBrPiSzHESHKAWKG7ALVD6xaG/NBjjd1DGJGQQQ==
   dependencies:
     denque "^2.1.0"
@@ -4951,7 +4951,7 @@ typedarray@^0.0.6:
 
 typeorm@^0.3.17:
   version "0.3.17"
-  resolved "https://registry.npmjs.org/typeorm/-/typeorm-0.3.17.tgz"
+  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.3.17.tgz#a73c121a52e4fbe419b596b244777be4e4b57949"
   integrity sha512-UDjUEwIQalO9tWw9O2A4GU+sT3oyoUXheHJy4ft+RFdnRdQctdQ34L9SqE2p7LdwzafHx1maxT+bqXON+Qnmig==
   dependencies:
     "@sqltools/formatter" "^1.2.5"
