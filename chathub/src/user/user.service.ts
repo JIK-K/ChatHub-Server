@@ -27,7 +27,7 @@ export class UserService {
     return this.userMapper.toDTO(await this.userRepository.save(userEntity));
   }
 
-  async login(id: string, pw: string): Promise<UserDTO> {
+  async login(id: string, pw: string): Promise<boolean> {
     const userEntity: User = await this.userRepository
       .createQueryBuilder('user')
       .where('userId = :userid AND userPassword = :userpassword', {
@@ -36,6 +36,10 @@ export class UserService {
       })
       .getOne();
 
-    return this.userMapper.toDTO(userEntity);
+    if (userEntity) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

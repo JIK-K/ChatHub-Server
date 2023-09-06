@@ -20,9 +20,7 @@ export class UserController {
   async login(
     @Query('id') id: string,
     @Query('pw') pw: string,
-  ): Promise<ResponseDTO<LoginDTO>> {
-    return ResponseUtil.makeSuccessResponse(
-      await this.userService.login(id, pw),
-    );
+  ): Promise<boolean> {
+    return this.userService.login(id, pw);
   }
 }
