@@ -33,6 +33,9 @@ export class User {
   @Column()
   userNickName: string;
 
+  @Column()
+  salt: string;
+
   @CreateDateColumn()
   createAt: Date; // 'create_at' 컬럼에 대한 기본값이 현재 시간으로 설정됩니다.
 

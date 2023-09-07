@@ -15,6 +15,8 @@ export interface UserDTO extends BaseDTO {
 
   userNickName: string;
 
+  salt: string;
+
   createAt?: Date;
   updateAt?: Date;
 }
