@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Query, Get } from '@nestjs/common';
+import { Body, Controller, Post, Query, Get, Logger } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDTO } from './DTOs/user.dto';
 import { ResponseDTO } from 'src/common/DTOs/response.dto';
@@ -8,6 +8,8 @@ import { LoginDTO } from './DTOs/login.dto';
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
+
+  private logger: Logger = new Logger('Login');
 
   @Post()
   async signUp(@Body() userDTO: UserDTO): Promise<ResponseDTO<UserDTO>> {
@@ -21,6 +23,7 @@ export class UserController {
     @Query('id') id: string,
     @Query('pw') pw: string,
   ): Promise<boolean> {
+    this.logger.log(`User Login : ${id}`);
     return this.userService.login(id, pw);
   }
 }
