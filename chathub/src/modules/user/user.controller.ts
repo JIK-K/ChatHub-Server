@@ -18,6 +18,12 @@ export class UserController {
     );
   }
 
+  @Get('/check')
+  async duplicateCheck(@Query('id') id: string): Promise<boolean> {
+    this.logger.log(`Check Id Data : ${id}`);
+    return this.userService.getUser(id);
+  }
+
   @Get('/login')
   async login(
     @Query('id') id: string,

@@ -34,6 +34,20 @@ export class UserService {
     return this.userMapper.toDTO(await this.userRepository.save(userEntity));
   }
 
+  async getUser(id: string): Promise<boolean> {
+    const userEntity: User = await this.userRepository
+      .createQueryBuilder('user')
+      .where('userId = :userid', {
+        userid: id,
+      })
+      .getOne();
+    if (userEntity) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   async login(id: string, pw: string): Promise<boolean> {
     const userEntity: User = await this.userRepository
       .createQueryBuilder('user')
