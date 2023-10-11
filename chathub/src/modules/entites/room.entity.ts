@@ -1,45 +1,30 @@
 // user.entity.ts
-import { Room } from 'src/modules/entites/room.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
+  ManyToOne,
 } from 'typeorm';
+import { User } from '../user/entites/user.entity';
 
 @Entity()
-export class User {
+export class Room {
   @PrimaryGeneratedColumn()
-  id: number;
+  roomId: number;
 
   @Column()
-  userName: string;
+  roomName: string;
 
   @Column()
-  userId: string;
+  roomMaxUser: string;
 
   @Column()
-  userPassword: string;
+  roomPassword: string;
 
-  @Column()
-  userEmail: string;
-
-  @Column()
-  userBirthday: string;
-
-  @Column()
-  userPhoneNumber: string;
-
-  @Column()
-  userNickName: string;
-
-  @Column()
-  salt: string;
-
-  @OneToMany((type) => Room, (room) => room.roomId)
-  room!: Room[];
+  @ManyToOne((type) => User, (user) => user.id, { onDelete: 'CASCADE' })
+  user!: User;
 
   @CreateDateColumn()
   createAt: Date; // 'create_at' 컬럼에 대한 기본값이 현재 시간으로 설정됩니다.
