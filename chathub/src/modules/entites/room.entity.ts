@@ -24,7 +24,7 @@ export class Room {
   roomPassword: string;
 
   @ManyToOne((type) => User, (user) => user.id, { onDelete: 'CASCADE' })
-  user!: User;
+  userid!: number;
 
   @CreateDateColumn()
   createAt: Date; // 'create_at' 컬럼에 대한 기본값이 현재 시간으로 설정됩니다.
