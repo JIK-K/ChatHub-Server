@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entites/user.entity';
-import { Repository } from 'typeorm';
+import { IntegerType, Repository } from 'typeorm';
 import { UserDTO } from './DTOs/user.dto';
 import { UserMapper } from './mapper/user.mapper';
 import { Builder } from 'builder-pattern';
@@ -66,5 +66,15 @@ export class UserService {
     } else {
       return false;
     }
+  }
+
+  async getSequenceId(id: string): Promise<IntegerType> {
+    const userEntity: User = await this.userRepository
+      .createQueryBuilder('user')
+      .where('userId = :userid', {
+        userid: id,
+      })
+      .getOne();
+    return userEntity.id;
   }
 }

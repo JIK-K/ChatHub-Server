@@ -4,6 +4,7 @@ import { UserDTO } from './DTOs/user.dto';
 import { ResponseDTO } from 'src/common/DTOs/response.dto';
 import { ResponseUtil } from 'src/utils/response.util';
 import { LoginDTO } from './DTOs/login.dto';
+import { IntegerType } from 'typeorm';
 
 @Controller('user')
 export class UserController {
@@ -31,5 +32,11 @@ export class UserController {
   ): Promise<boolean> {
     this.logger.log(`User Login : ${id}`);
     return this.userService.login(id, pw);
+  }
+
+  @Get('/id')
+  async getId(@Query('id') id: string): Promise<IntegerType> {
+    this.logger.log(`Search User Sequence ID : ${id}`);
+    return this.userService.getSequenceId(id);
   }
 }

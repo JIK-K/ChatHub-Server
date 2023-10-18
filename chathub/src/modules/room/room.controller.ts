@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, Query } from '@nestjs/common';
 import { RoomService } from './room.service';
 import { RoomDTO } from '../DTOs/room.dto';
 import { ResponseDTO } from 'src/common/DTOs/response.dto';
@@ -24,6 +24,16 @@ export class RoomController {
     );
     return ResponseUtil.makeSuccessResponse(
       await this.roomService.create(roomDTO),
+    );
+  }
+
+  @Get('/list')
+  async findList(
+    @Query('offset') offset: number,
+    @Query('limit') limit: number,
+  ): Promise<ResponseDTO<RoomDTO[]>> {
+    return ResponseUtil.makeSuccessResponse(
+      await this.roomService.findList(offset, limit),
     );
   }
 }
