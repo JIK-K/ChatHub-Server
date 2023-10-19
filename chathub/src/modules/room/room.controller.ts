@@ -19,7 +19,7 @@ export class RoomController {
         roomDTO.roomName +
         ' roomPassword: ' +
         roomDTO.roomPassword +
-        ' fk: ' +
+        ' User.Id(Sequence): ' +
         roomDTO.userId,
     );
     return ResponseUtil.makeSuccessResponse(
@@ -35,5 +35,11 @@ export class RoomController {
     return ResponseUtil.makeSuccessResponse(
       await this.roomService.findList(offset, limit),
     );
+  }
+
+  @Get('/check')
+  async duplicateCheck(@Query('room') id: string): Promise<boolean> {
+    this.logger.log(`Check Id Data : ${id}`);
+    return this.roomService.getRoom(id);
   }
 }

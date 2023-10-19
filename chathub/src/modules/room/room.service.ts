@@ -38,12 +38,26 @@ export class RoomService {
   async findList(offset: number, limit: number): Promise<RoomDTO[]> {
     const paging: Paging = new Paging(offset, limit);
     const roomEntites: Room[] = await this.roomRepository
-      .createQueryBuilder('office')
+      .createQueryBuilder('room')
       .select()
       .offset(paging.offset)
       .limit(paging.limit)
       .getMany();
 
     return this.roomMapper.toDTOList(roomEntites);
+  }
+
+  async getRoom(name: string): Promise<boolean> {
+    const roomEntity: Room = await this.roomRepository
+      .createQueryBuilder('room')
+      .where('roomName = :roomname', {
+        roomname: name,
+      })
+      .getOne();
+    if (roomEntity) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
