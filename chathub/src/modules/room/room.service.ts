@@ -24,6 +24,7 @@ export class RoomService {
       .roomName(roomDTO.roomName)
       .roomMaxUser(roomDTO.roomMaxUser)
       .roomPassword(roomDTO.roomPassword)
+      .roomConnectUser(roomDTO.roomConnectUser)
       .userid(roomDTO.userId)
       .build();
     return this.roomMapper.toDTO(await this.roomRepository.save(roomEntity));
@@ -35,18 +36,23 @@ export class RoomService {
    * @param limit
    * @returns
    */
-  async findList(offset: number, limit: number): Promise<RoomDTO[]> {
-    const paging: Paging = new Paging(offset, limit);
+  async findList(): Promise<RoomDTO[]> {
+    // const paging: Paging = new Paging(offset, limit);
     const roomEntites: Room[] = await this.roomRepository
       .createQueryBuilder('room')
       .select()
-      .offset(paging.offset)
-      .limit(paging.limit)
+      // .offset(paging.offset)
+      // .limit(paging.limit)
       .getMany();
 
     return this.roomMapper.toDTOList(roomEntites);
   }
 
+  /**
+   * 채팅방 이름 조회
+   * @param name
+   * @returns
+   */
   async getRoom(name: string): Promise<boolean> {
     const roomEntity: Room = await this.roomRepository
       .createQueryBuilder('room')
@@ -58,6 +64,23 @@ export class RoomService {
       return false;
     } else {
       return true;
+    }
+  }
+
+  /**
+   * DB roomConnectUser 컬럼 업데이트
+   * @param roomName
+   * @returns
+   */
+  async joinRoom(roomName: string): Promise<RoomDTO> {
+    const roomEntity: Room = await this.roomRepository.findOneBy({
+      roomName: roomName,
+    });
+    if (roomEntity.roomConnectUser >= parseInt(roomEntity.roomMaxUser)) {
+      console.log('room is full');
+    } else {
+      roomEntity.roomConnectUser = roomEntity.roomConnectUser + 1;
+      return this.roomMapper.toDTO(await this.roomRepository.save(roomEntity));
     }
   }
 }

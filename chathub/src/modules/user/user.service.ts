@@ -15,6 +15,11 @@ export class UserService {
     private userMapper: UserMapper,
   ) {}
 
+  /**
+   * User 생성
+   * @param userDTO
+   * @returns
+   */
   async create(userDTO: UserDTO): Promise<UserDTO> {
     const saltRound = 10;
     const salt = await bcrypt.genSalt(saltRound);
@@ -34,6 +39,11 @@ export class UserService {
     return this.userMapper.toDTO(await this.userRepository.save(userEntity));
   }
 
+  /**
+   * User SequenceId 가져오기
+   * @param id
+   * @returns
+   */
   async getUser(id: string): Promise<boolean> {
     const userEntity: User = await this.userRepository
       .createQueryBuilder('user')
@@ -48,6 +58,12 @@ export class UserService {
     }
   }
 
+  /**
+   * User 로그인
+   * @param id
+   * @param pw
+   * @returns
+   */
   async login(id: string, pw: string): Promise<boolean> {
     const userEntity: User = await this.userRepository
       .createQueryBuilder('user')
@@ -68,6 +84,11 @@ export class UserService {
     }
   }
 
+  /**
+   * 사용자 DB 순차번호(PK) 얻기
+   * @param id
+   * @returns
+   */
   async getSequenceId(id: string): Promise<IntegerType> {
     const userEntity: User = await this.userRepository
       .createQueryBuilder('user')
@@ -76,5 +97,20 @@ export class UserService {
       })
       .getOne();
     return userEntity.id;
+  }
+
+  /**
+   * User 프로필 가져오기
+   * @param id
+   * @returns
+   */
+  async userProfile(id: string): Promise<UserDTO> {
+    const userEntity: User = await this.userRepository
+      .createQueryBuilder('user')
+      .where('userId = :userid', {
+        userid: id,
+      })
+      .getOne();
+    return userEntity;
   }
 }

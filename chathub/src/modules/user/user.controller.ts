@@ -39,4 +39,10 @@ export class UserController {
     this.logger.log(`Search User Sequence ID : ${id}`);
     return this.userService.getSequenceId(id);
   }
+
+  @Get('/profile')
+  async getProfile(@Query('id') id: string): Promise<UserDTO> {
+    this.logger.log(`Get User Profile : ${id}`);
+    return this.userService.userProfile(id);
+  }
 }

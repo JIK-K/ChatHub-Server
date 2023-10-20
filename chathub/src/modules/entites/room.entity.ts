@@ -21,7 +21,7 @@ export class Room {
   roomMaxUser: string;
 
   @Column()
-  roomConnectUser: string;
+  roomConnectUser: number;
 
   @Column()
   roomPassword: string;
