@@ -8,12 +8,14 @@ export class RoomMapper {
   constructor() {}
 
   toDTO(roomEntity: Room): RoomDTO {
-    const { roomName, roomMaxUser, roomPassword, userid } = roomEntity;
+    const { roomName, roomMaxUser, roomPassword, roomConnectUser, userid } =
+      roomEntity;
 
     return Builder<RoomDTO>()
       .roomName(roomName)
       .roomMaxUser(roomMaxUser)
       .roomPassword(roomPassword)
+      .roomConnectUser(roomConnectUser)
       .userId(userid)
       .build();
   }

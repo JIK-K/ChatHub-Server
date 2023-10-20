@@ -21,6 +21,9 @@ export class Room {
   roomMaxUser: string;
 
   @Column()
+  roomConnectUser: string;
+
+  @Column()
   roomPassword: string;
 
   @ManyToOne((type) => User, (user) => user.id, { onDelete: 'CASCADE' })

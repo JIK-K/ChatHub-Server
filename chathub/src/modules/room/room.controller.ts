@@ -31,10 +31,9 @@ export class RoomController {
   async findList(
     @Query('offset') offset: number,
     @Query('limit') limit: number,
-  ): Promise<ResponseDTO<RoomDTO[]>> {
-    return ResponseUtil.makeSuccessResponse(
-      await this.roomService.findList(offset, limit),
-    );
+  ): Promise<RoomDTO[]> {
+    this.logger.log(`Get Room List`);
+    return this.roomService.findList(offset, limit);
   }
 
   @Get('/check')
