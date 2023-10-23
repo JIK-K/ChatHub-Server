@@ -7,28 +7,23 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToOne,
 } from 'typeorm';
-import { User } from '../../user/entites/user.entity';
+import { Room } from './room.entity';
 
 @Entity()
-export class Room {
+export class RoomData {
   @PrimaryGeneratedColumn()
-  roomId: number;
+  roomDataId: number;
 
   @Column()
-  roomName: string;
+  connectUserId: number;
 
   @Column()
-  roomMaxUser: string;
+  connectUserName: string;
 
-  @Column()
-  roomConnectUser: number;
-
-  @Column()
-  roomPassword: string;
-
-  @ManyToOne((type) => User, (user) => user.id, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'userId' }) // userId 컬럼의 이름을 변경
+  @OneToOne((type) => Room, (room) => room.roomId, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'roomId' }) // userId 컬럼의 이름을 변경
   userid!: number;
 
   @CreateDateColumn()
