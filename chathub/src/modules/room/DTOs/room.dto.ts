@@ -1,4 +1,4 @@
-import { User } from '../user/entites/user.entity';
+import { User } from '../../user/entites/user.entity';
 
 export interface RoomDTO {
   roomName: string;

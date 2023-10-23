@@ -9,6 +9,7 @@ export class UserMapper {
 
   toDTO(userEntity: User): UserDTO {
     const {
+      id,
       userName,
       userId,
       userPassword,
@@ -19,6 +20,7 @@ export class UserMapper {
     } = userEntity;
 
     return Builder<UserDTO>()
+      .id(id)
       .userName(userName)
       .userId(userId)
       .userPassword(userPassword)

@@ -1,6 +1,7 @@
 import { BaseDTO } from 'src/base/base.dto';
 
 export interface UserDTO extends BaseDTO {
+  id: number;
   userName: string;
 
   userId: string;
@@ -15,8 +16,8 @@ export interface UserDTO extends BaseDTO {
 
   userNickName: string;
 
-  salt: string;
+  // salt: string;
 
-  createAt?: Date;
-  updateAt?: Date;
+  // createAt?: Date;
+  // updateAt?: Date;
 }

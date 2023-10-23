@@ -1,5 +1,5 @@
 // user.entity.ts
-import { Room } from 'src/modules/entites/room.entity';
+import { Room } from 'src/modules/room/entites/room.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entites/user.entity';
 import { IntegerType, Repository } from 'typeorm';
@@ -7,6 +7,8 @@ import { UserMapper } from './mapper/user.mapper';
 import { Builder } from 'builder-pattern';
 import { Logger } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { CommonUtil } from 'src/utils/common.util';
+import { CODE_CONSTANT } from 'src/common/constants/common-code.constant';
 
 @Injectable()
 export class UserService {
@@ -35,6 +37,22 @@ export class UserService {
       .userNickName(userDTO.userNickName)
       .salt(salt)
       .build();
+
+    return this.userMapper.toDTO(await this.userRepository.save(userEntity));
+  }
+
+  async update(userDTO: UserDTO): Promise<UserDTO> {
+    const userEntity: User = await this.userRepository.findOneBy({
+      id: userDTO.id,
+    });
+
+    if (!CommonUtil.isValid(userEntity)) {
+      throw new HttpException(CODE_CONSTANT.NO_DATA, HttpStatus.BAD_REQUEST);
+    }
+
+    if (CommonUtil.isValid(userDTO.userNickName)) {
+      userEntity.userNickName = userDTO.userNickName;
+    }
 
     return this.userMapper.toDTO(await this.userRepository.save(userEntity));
   }
@@ -104,10 +122,10 @@ export class UserService {
    * @param id
    * @returns
    */
-  async userProfile(id: string): Promise<UserDTO> {
+  async userProfile(id: number): Promise<UserDTO> {
     const userEntity: User = await this.userRepository
       .createQueryBuilder('user')
-      .where('userId = :userid', {
+      .where('id = :userid', {
         userid: id,
       })
       .getOne();

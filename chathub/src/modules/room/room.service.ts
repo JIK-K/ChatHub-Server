@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Room } from '../entites/room.entity';
+import { Room } from './entites/room.entity';
 import { Repository } from 'typeorm';
-import { RoomDTO } from '../DTOs/room.dto';
-import { RoomMapper } from '../mapper/room.mapper';
+import { RoomDTO } from './DTOs/room.dto';
+import { RoomMapper } from './mapper/room.mapper';
 import { Builder } from 'builder-pattern';
 import { Paging } from 'src/common/classes/paging.class';
 
