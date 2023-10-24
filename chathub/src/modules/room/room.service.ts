@@ -34,10 +34,19 @@ export class RoomService {
       .build();
 
     this.roomMapper.toDTO(await this.roomRepository.save(roomEntity));
+    console.log(roomDTO.user.id);
+    const userEntity: User = await this.userRepository
+      .createQueryBuilder('user')
+      .select()
+      .where('id = :userId', {
+        userId: roomDTO.user,
+      })
+      .getOne();
+    // .findOneBy({
+    //   id: roomDTO.user.id,
 
-    const userEntity: User = await this.userRepository.findOneBy({
-      id: roomDTO.user.id,
-    });
+    // });
+    console.log(userEntity);
 
     roomEntity.roomConnectUser = roomEntity.roomConnectUser + 1;
     const roomDataEntity: RoomData = Builder<RoomData>()
