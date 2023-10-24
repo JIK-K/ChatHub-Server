@@ -5,5 +5,5 @@ export interface RoomDTO {
   roomMaxUser: string;
   roomPassword: string;
   roomConnectUser: number;
-  userId: number;
+  user: User;
 }
