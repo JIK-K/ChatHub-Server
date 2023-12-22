@@ -118,10 +118,7 @@ export class RoomService {
       })
       .getOne();
 
-    if (
-      roomEntity.roomConnectUser >= parseInt(roomEntity.roomMaxUser) ||
-      roomDataEntity
-    ) {
+    if (roomEntity.roomConnectUser >= parseInt(roomEntity.roomMaxUser)) {
       console.log('room is full');
     } else {
       roomEntity.roomConnectUser = roomEntity.roomConnectUser + 1;
